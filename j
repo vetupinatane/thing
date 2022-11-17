@@ -4237,3 +4237,5 @@ coroutine.wrap(AHVT_fake_script)()
 coroutine.wrap(PMUGU_fake_script)()
 coroutine.wrap(YYHBRR_fake_script)()
 coroutine.wrap(KATMFMC_fake_script)()
+
+flight = ["_flight"]
