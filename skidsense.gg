@@ -1,1 +1,2024 @@
-game.PLayers.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+--skidsense.gg variable
+
+
+repeat wait() until game:IsLoaded()
+
+--CONFIG
+
+getgenv().walky = Enum.KeyCode.H
+getgenv().noclipkey = Enum.KeyCode.C
+getgenv().flykey = Enum.KeyCode.Z
+getgenv().esp = false
+
+--ignore
+
+getgenv().walkspeed = false
+getgenv().FlightEnabled = false
+getgenv().noclipen = false
+
+--Tables
+listpart = {}
+anchor = {}
+local Keys = {W = 0, S = 0, D = 0, A = 0}
+
+--Instance  variables
+plr = game:GetService("Players").LocalPlayer
+char = plr.Character
+chr = char
+root = char:WaitForChild("HumanoidRootPart")
+camera = workspace.CurrentCamera
+hum = char:WaitForChild("Humanoid")
+
+--Services
+
+UIS = game:GetService("UserInputService")
+rs = game:GetService("RunService")
+
+--ad
+
+local skid = Drawing.new("Text")
+local sense = Drawing.new("Text")
+skid.Text = "skid"
+sense.Text = "sense.gg"
+skid.Font = 2
+sense.Font = 2
+skid.Size = 13
+sense.Size = 13
+skid.Color = Color3.fromRGB(110,129,255)
+sense.Color = Color3.fromRGB(255,255,255)
+skid.Visible = true
+sense.Visible = true
+skid.Position = Vector2.new(100,10)
+sense.Position = Vector2.new(128,10)
+
+game.Players.LocalPlayer.CharacterAdded:Connect(function()
+    lp = game.Players.LocalPlayer
+    hum = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
+    root = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+    torso = game.Players.LocalPlayer.Character:WaitForChild("Torso")
+    Camera = game.workspace.CurrentCamera
+    camera = game.workspace.CurrentCamera
+    char = lp.Character
+    torso.Touched:Connect(function(part)
+        if getgenv().noclipen and not part.Parent:FindFirstChild("Humanoid") and part.Anchored == false and part.Name ~= name and part.Parent ~= "Live" and part.Parent.Parent ~= "Live" then
+        part.Anchored = true
+        table.insert(anchor, part)
+    end
+end)
+
+        torso.Touched:Connect(function(part)
+            if getgenv().noclipen and part.CanCollide == true and part.Name ~= name and part.Parent ~= "Live" and part.Parent.Parent ~= "Live" then
+            part.CanCollide = false
+             table.insert(listpart, part)
+        end
+    end)
+end)
+hum.Died:Connect(function()
+    getgenv().walkspeed = false
+end)
+
+
+--script below
+
+pcall(function()
+    -- Generated using RoadToGlory's Converter v1.1 (RoadToGlory#9879)
+
+-- Instances:
+
+local Converted = {
+	["_ScreenGui"] = Instance.new("ScreenGui");
+	["_Frame"] = Instance.new("Frame");
+	["_dector"] = Instance.new("Frame");
+	["_mainFrame"] = Instance.new("Frame");
+	["_decor2"] = Instance.new("Frame");
+	["_TextLabel"] = Instance.new("TextLabel");
+	["_Flight"] = Instance.new("TextButton");
+	["_LocalScript"] = Instance.new("LocalScript");
+	["_ButtonBG"] = Instance.new("ImageButton");
+	["_crcl"] = Instance.new("Frame");
+	["_UICorner"] = Instance.new("UICorner");
+	["_Status"] = Instance.new("BoolValue");
+	["_UICorner1"] = Instance.new("UICorner");
+	["_keybind"] = Instance.new("TextButton");
+	["_LocalScript1"] = Instance.new("LocalScript");
+	["_flightSlider"] = Instance.new("TextButton");
+	["_Bar"] = Instance.new("Frame");
+	["_SliderManager"] = Instance.new("LocalScript");
+	["_Fire"] = Instance.new("BoolValue");
+	["_TextLabel1"] = Instance.new("TextLabel");
+	["_LocalScript2"] = Instance.new("LocalScript");
+	["_walkSlider"] = Instance.new("TextButton");
+	["_Bar1"] = Instance.new("Frame");
+	["_SliderManager1"] = Instance.new("LocalScript");
+	["_Fire1"] = Instance.new("BoolValue");
+	["_TextLabel2"] = Instance.new("TextLabel");
+	["_LocalScript3"] = Instance.new("LocalScript");
+	["_walkspeed"] = Instance.new("TextButton");
+	["_LocalScript4"] = Instance.new("LocalScript");
+	["_ButtonBG1"] = Instance.new("ImageButton");
+	["_crcl1"] = Instance.new("Frame");
+	["_UICorner2"] = Instance.new("UICorner");
+	["_Status1"] = Instance.new("BoolValue");
+	["_UICorner3"] = Instance.new("UICorner");
+	["_keybind1"] = Instance.new("TextButton");
+	["_LocalScript5"] = Instance.new("LocalScript");
+	["_decor3"] = Instance.new("Frame");
+	["_TextLabel3"] = Instance.new("TextLabel");
+	["_noclip"] = Instance.new("TextButton");
+	["_LocalScript6"] = Instance.new("LocalScript");
+	["_ButtonBG2"] = Instance.new("ImageButton");
+	["_crcl2"] = Instance.new("Frame");
+	["_UICorner4"] = Instance.new("UICorner");
+	["_Status2"] = Instance.new("BoolValue");
+	["_UICorner5"] = Instance.new("UICorner");
+	["_keybind2"] = Instance.new("TextButton");
+	["_LocalScript7"] = Instance.new("LocalScript");
+	["_TextButton"] = Instance.new("TextButton");
+	["_LocalScript8"] = Instance.new("LocalScript");
+	["_visualFrame"] = Instance.new("Frame");
+	["_decor21"] = Instance.new("Frame");
+	["_TextLabel4"] = Instance.new("TextLabel");
+	["_esp"] = Instance.new("TextButton");
+	["_ButtonBG3"] = Instance.new("ImageButton");
+	["_crcl3"] = Instance.new("Frame");
+	["_UICorner6"] = Instance.new("UICorner");
+	["_Status3"] = Instance.new("BoolValue");
+	["_UICorner7"] = Instance.new("UICorner");
+	["_LocalScript9"] = Instance.new("LocalScript");
+	["_maxzoom"] = Instance.new("TextButton");
+	["_LocalScript10"] = Instance.new("LocalScript");
+	["_ButtonBG4"] = Instance.new("ImageButton");
+	["_crcl4"] = Instance.new("Frame");
+	["_UICorner8"] = Instance.new("UICorner");
+	["_Status4"] = Instance.new("BoolValue");
+	["_UICorner9"] = Instance.new("UICorner");
+	["_TextLabel5"] = Instance.new("TextLabel");
+	["_fullbright"] = Instance.new("TextButton");
+	["_LocalScript11"] = Instance.new("LocalScript");
+	["_ButtonBG5"] = Instance.new("ImageButton");
+	["_crcl5"] = Instance.new("Frame");
+	["_UICorner10"] = Instance.new("UICorner");
+	["_Status5"] = Instance.new("BoolValue");
+	["_UICorner11"] = Instance.new("UICorner");
+	["_TextLabel6"] = Instance.new("TextLabel");
+	["_healthbar"] = Instance.new("TextButton");
+	["_Bar2"] = Instance.new("Frame");
+	["_SliderManager2"] = Instance.new("LocalScript");
+	["_Fire2"] = Instance.new("BoolValue");
+	["_TextLabel7"] = Instance.new("TextLabel");
+	["_LocalScript12"] = Instance.new("LocalScript");
+	["_section"] = Instance.new("Frame");
+	["_visual"] = Instance.new("TextButton");
+	["_Frame1"] = Instance.new("Frame");
+	["_main"] = Instance.new("TextButton");
+	["_Frame2"] = Instance.new("Frame");
+	["_skid"] = Instance.new("TextLabel");
+	["_sense"] = Instance.new("TextLabel");
+	["_note"] = Instance.new("TextLabel");
+	["_LocalScript13"] = Instance.new("LocalScript");
+	["_loaded"] = Instance.new("TextLabel");
+	["_krnl"] = Instance.new("TextLabel");
+	["_synapse"] = Instance.new("TextLabel");
+	["_unknown"] = Instance.new("TextLabel");
+	["_Shadow"] = Instance.new("ImageLabel");
+}
+
+-- Properties:
+
+Converted["_ScreenGui"].ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+Converted["_ScreenGui"].Parent = game:GetService("CoreGui")
+
+Converted["_Frame"].BackgroundColor3 = Color3.fromRGB(49.000004678964615, 48.00000473856926, 58.00000414252281)
+Converted["_Frame"].Position = UDim2.new(0.0818253309, 0, 0.163414627, 0)
+Converted["_Frame"].Size = UDim2.new(0, 298, 0, 386)
+Converted["_Frame"].Parent = Converted["_ScreenGui"]
+
+Converted["_dector"].BackgroundColor3 = Color3.fromRGB(37.00000159442425, 36.00000165402889, 44.000001177191734)
+Converted["_dector"].BorderSizePixel = 0
+Converted["_dector"].Position = UDim2.new(0.0170440171, 0, 0.101284482, 0)
+Converted["_dector"].Size = UDim2.new(0, 287, 0, 339)
+Converted["_dector"].Name = "dector"
+Converted["_dector"].Parent = Converted["_Frame"]
+
+Converted["_mainFrame"].BackgroundColor3 = Color3.fromRGB(43.00000123679638, 42.000001296401024, 51.00000075995922)
+Converted["_mainFrame"].BorderSizePixel = 0
+Converted["_mainFrame"].Position = UDim2.new(0.0139372293, 0, 0.0109665683, 0)
+Converted["_mainFrame"].Size = UDim2.new(0, 279, 0, 330)
+Converted["_mainFrame"].Name = "mainFrame"
+Converted["_mainFrame"].Parent = Converted["_dector"]
+
+Converted["_decor2"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_decor2"].BackgroundTransparency = 0.800000011920929
+Converted["_decor2"].BorderSizePixel = 0
+Converted["_decor2"].Position = UDim2.new(0.0179211479, 0, 0.0303030275, 0)
+Converted["_decor2"].Size = UDim2.new(0, 268, 0, 1)
+Converted["_decor2"].Name = "decor2"
+Converted["_decor2"].Parent = Converted["_mainFrame"]
+
+Converted["_TextLabel"].Font = Enum.Font.SourceSans
+Converted["_TextLabel"].Text = "main tab"
+Converted["_TextLabel"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel"].TextSize = 14
+Converted["_TextLabel"].TextTransparency = 0.6000000238418579
+Converted["_TextLabel"].BackgroundColor3 = Color3.fromRGB(43.00000123679638, 42.000001296401024, 51.000004559755325)
+Converted["_TextLabel"].BorderSizePixel = 0
+Converted["_TextLabel"].Position = UDim2.new(0.354477614, 0, -9, 0)
+Converted["_TextLabel"].Size = UDim2.new(0, 75, 0, 19)
+Converted["_TextLabel"].Parent = Converted["_decor2"]
+
+Converted["_Flight"].Font = Enum.Font.Code
+Converted["_Flight"].Text = "Flight"
+Converted["_Flight"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Flight"].TextSize = 13
+Converted["_Flight"].TextTransparency = 0.23999999463558197
+Converted["_Flight"].BackgroundColor3 = Color3.fromRGB(42.000001296401024, 42.000001296401024, 42.000001296401024)
+Converted["_Flight"].BackgroundTransparency = 1
+Converted["_Flight"].BorderSizePixel = 0
+Converted["_Flight"].Position = UDim2.new(0.11108961, 0, 0.0887878761, 0)
+Converted["_Flight"].Size = UDim2.new(0, 144, 0, 19)
+Converted["_Flight"].Name = "Flight"
+Converted["_Flight"].Parent = Converted["_mainFrame"]
+
+Converted["_ButtonBG"].AutoButtonColor = false
+Converted["_ButtonBG"].Active = false
+Converted["_ButtonBG"].BackgroundColor3 = Color3.fromRGB(234.00000125169754, 234.00000125169754, 234.00000125169754)
+Converted["_ButtonBG"].Position = UDim2.new(0.45377779, -79, 1.76873684, -30)
+Converted["_ButtonBG"].Selectable = false
+Converted["_ButtonBG"].Size = UDim2.new(0, 34, 0, 10)
+Converted["_ButtonBG"].Name = "ButtonBG"
+Converted["_ButtonBG"].Parent = Converted["_Flight"]
+
+Converted["_crcl"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_crcl"].BorderColor3 = Color3.fromRGB(85.0000025331974, 172.00000494718552, 254.00001525878906)
+Converted["_crcl"].Position = UDim2.new(-0.074000001, 0, -0.181999996, 0)
+Converted["_crcl"].Size = UDim2.new(0, 13, 0, 13)
+Converted["_crcl"].Name = "crcl"
+Converted["_crcl"].Parent = Converted["_ButtonBG"]
+
+Converted["_UICorner"].CornerRadius = UDim.new(0, 100)
+Converted["_UICorner"].Parent = Converted["_crcl"]
+
+Converted["_Status"].Name = "Status"
+Converted["_Status"].Parent = Converted["_ButtonBG"]
+
+Converted["_UICorner1"].CornerRadius = UDim.new(1, 0)
+Converted["_UICorner1"].Parent = Converted["_ButtonBG"]
+
+Converted["_keybind"].Font = Enum.Font.Code
+Converted["_keybind"].Text = "[ Z ]"
+Converted["_keybind"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_keybind"].TextSize = 13
+Converted["_keybind"].TextTransparency = 0.23999999463558197
+Converted["_keybind"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_keybind"].BackgroundTransparency = 1
+Converted["_keybind"].Position = UDim2.new(1.02083337, 0, -0.000368420035, 0)
+Converted["_keybind"].Size = UDim2.new(0, 64, 0, 19)
+Converted["_keybind"].Name = "keybind"
+Converted["_keybind"].Parent = Converted["_Flight"]
+
+Converted["_flightSlider"].Font = Enum.Font.SourceSans
+Converted["_flightSlider"].Text = ""
+Converted["_flightSlider"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_flightSlider"].TextSize = 14
+Converted["_flightSlider"].AutoButtonColor = false
+Converted["_flightSlider"].AnchorPoint = Vector2.new(0.5, 0.5)
+Converted["_flightSlider"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_flightSlider"].BackgroundTransparency = 0.949999988079071
+Converted["_flightSlider"].BorderSizePixel = 0
+Converted["_flightSlider"].Position = UDim2.new(0.406585991, 0, 0.183333337, 0)
+Converted["_flightSlider"].Size = UDim2.new(0.695788503, 0, 0.0242424235, 0)
+Converted["_flightSlider"].Name = "flightSlider"
+Converted["_flightSlider"].Parent = Converted["_mainFrame"]
+
+Converted["_Bar"].BackgroundColor3 = Color3.fromRGB(110.00000864267349, 129.00000751018524, 255)
+Converted["_Bar"].BorderSizePixel = 0
+Converted["_Bar"].Size = UDim2.new(0.5, 0, 1, 0)
+Converted["_Bar"].Name = "Bar"
+Converted["_Bar"].Parent = Converted["_flightSlider"]
+
+Converted["_Fire"].Name = "Fire"
+Converted["_Fire"].Parent = Converted["_flightSlider"]
+
+Converted["_TextLabel1"].Font = Enum.Font.SourceSans
+Converted["_TextLabel1"].Text = "50"
+Converted["_TextLabel1"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel1"].TextSize = 14
+Converted["_TextLabel1"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel1"].BackgroundTransparency = 1
+Converted["_TextLabel1"].Position = UDim2.new(1.06871879, 0, -0.108333349, 0)
+Converted["_TextLabel1"].Size = UDim2.new(0, 42, 0, 8)
+Converted["_TextLabel1"].Parent = Converted["_flightSlider"]
+
+Converted["_walkSlider"].Font = Enum.Font.SourceSans
+Converted["_walkSlider"].Text = ""
+Converted["_walkSlider"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_walkSlider"].TextSize = 14
+Converted["_walkSlider"].AutoButtonColor = false
+Converted["_walkSlider"].AnchorPoint = Vector2.new(0.5, 0.5)
+Converted["_walkSlider"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_walkSlider"].BackgroundTransparency = 0.949999988079071
+Converted["_walkSlider"].BorderSizePixel = 0
+Converted["_walkSlider"].Position = UDim2.new(0.406585991, 0, 0.362121224, 0)
+Converted["_walkSlider"].Size = UDim2.new(0.695788503, 0, 0.0242424235, 0)
+Converted["_walkSlider"].Name = "walkSlider"
+Converted["_walkSlider"].Parent = Converted["_mainFrame"]
+
+Converted["_Bar1"].BackgroundColor3 = Color3.fromRGB(110.00000864267349, 129.00000751018524, 255)
+Converted["_Bar1"].BorderSizePixel = 0
+Converted["_Bar1"].Size = UDim2.new(0.5, 0, 1, 0)
+Converted["_Bar1"].Name = "Bar"
+Converted["_Bar1"].Parent = Converted["_walkSlider"]
+
+Converted["_Fire1"].Name = "Fire"
+Converted["_Fire1"].Parent = Converted["_walkSlider"]
+
+Converted["_TextLabel2"].Font = Enum.Font.SourceSans
+Converted["_TextLabel2"].Text = "0.3"
+Converted["_TextLabel2"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel2"].TextSize = 14
+Converted["_TextLabel2"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel2"].BackgroundTransparency = 1
+Converted["_TextLabel2"].Position = UDim2.new(1.06871879, 0, -0.108333349, 0)
+Converted["_TextLabel2"].Size = UDim2.new(0, 42, 0, 8)
+Converted["_TextLabel2"].Parent = Converted["_walkSlider"]
+
+Converted["_walkspeed"].Font = Enum.Font.Code
+Converted["_walkspeed"].Text = "walkspeed"
+Converted["_walkspeed"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_walkspeed"].TextSize = 13
+Converted["_walkspeed"].TextTransparency = 0.23999999463558197
+Converted["_walkspeed"].BackgroundColor3 = Color3.fromRGB(42.000001296401024, 42.000001296401024, 42.000001296401024)
+Converted["_walkspeed"].BackgroundTransparency = 1
+Converted["_walkspeed"].BorderSizePixel = 0
+Converted["_walkspeed"].Position = UDim2.new(0.111000001, 0, 0.257999986, 0)
+Converted["_walkspeed"].Size = UDim2.new(0, 144, 0, 19)
+Converted["_walkspeed"].Name = "walkspeed"
+Converted["_walkspeed"].Parent = Converted["_mainFrame"]
+
+Converted["_ButtonBG1"].AutoButtonColor = false
+Converted["_ButtonBG1"].Active = false
+Converted["_ButtonBG1"].BackgroundColor3 = Color3.fromRGB(234.00000125169754, 234.00000125169754, 234.00000125169754)
+Converted["_ButtonBG1"].Position = UDim2.new(0.45377779, -79, 1.76873684, -30)
+Converted["_ButtonBG1"].Selectable = false
+Converted["_ButtonBG1"].Size = UDim2.new(0, 34, 0, 10)
+Converted["_ButtonBG1"].Name = "ButtonBG"
+Converted["_ButtonBG1"].Parent = Converted["_walkspeed"]
+
+Converted["_crcl1"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_crcl1"].BorderColor3 = Color3.fromRGB(85.0000025331974, 172.00000494718552, 254.00001525878906)
+Converted["_crcl1"].Position = UDim2.new(-0.074000001, 0, -0.181999996, 0)
+Converted["_crcl1"].Size = UDim2.new(0, 13, 0, 13)
+Converted["_crcl1"].Name = "crcl"
+Converted["_crcl1"].Parent = Converted["_ButtonBG1"]
+
+Converted["_UICorner2"].CornerRadius = UDim.new(0, 100)
+Converted["_UICorner2"].Parent = Converted["_crcl1"]
+
+Converted["_Status1"].Name = "Status"
+Converted["_Status1"].Parent = Converted["_ButtonBG1"]
+
+Converted["_UICorner3"].CornerRadius = UDim.new(1, 0)
+Converted["_UICorner3"].Parent = Converted["_ButtonBG1"]
+
+Converted["_keybind1"].Font = Enum.Font.Code
+Converted["_keybind1"].Text = "[ H ]"
+Converted["_keybind1"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_keybind1"].TextSize = 13
+Converted["_keybind1"].TextTransparency = 0.23999999463558197
+Converted["_keybind1"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_keybind1"].BackgroundTransparency = 1
+Converted["_keybind1"].Position = UDim2.new(1.02083337, 0, -0.000368420035, 0)
+Converted["_keybind1"].Size = UDim2.new(0, 64, 0, 19)
+Converted["_keybind1"].Name = "keybind"
+Converted["_keybind1"].Parent = Converted["_walkspeed"]
+
+Converted["_decor3"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_decor3"].BackgroundTransparency = 0.800000011920929
+Converted["_decor3"].BorderSizePixel = 0
+Converted["_decor3"].Position = UDim2.new(0.0179211479, 0, 0.451515108, 0)
+Converted["_decor3"].Size = UDim2.new(0, 268, 0, 1)
+Converted["_decor3"].Name = "decor3"
+Converted["_decor3"].Parent = Converted["_mainFrame"]
+
+Converted["_TextLabel3"].Font = Enum.Font.SourceSans
+Converted["_TextLabel3"].Text = "misc stuff"
+Converted["_TextLabel3"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel3"].TextSize = 14
+Converted["_TextLabel3"].TextTransparency = 0.6000000238418579
+Converted["_TextLabel3"].BackgroundColor3 = Color3.fromRGB(43.00000123679638, 42.000001296401024, 51.000004559755325)
+Converted["_TextLabel3"].BorderSizePixel = 0
+Converted["_TextLabel3"].Position = UDim2.new(0.354477614, 0, -9, 0)
+Converted["_TextLabel3"].Size = UDim2.new(0, 75, 0, 19)
+Converted["_TextLabel3"].Parent = Converted["_decor3"]
+
+Converted["_noclip"].Font = Enum.Font.Code
+Converted["_noclip"].Text = "noclip"
+Converted["_noclip"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_noclip"].TextSize = 13
+Converted["_noclip"].TextTransparency = 0.23999999463558197
+Converted["_noclip"].BackgroundColor3 = Color3.fromRGB(42.000001296401024, 42.000001296401024, 42.000001296401024)
+Converted["_noclip"].BackgroundTransparency = 1
+Converted["_noclip"].BorderSizePixel = 0
+Converted["_noclip"].Position = UDim2.new(0.111000001, 0, 0.518999994, 0)
+Converted["_noclip"].Size = UDim2.new(0, 144, 0, 19)
+Converted["_noclip"].Name = "noclip"
+Converted["_noclip"].Parent = Converted["_mainFrame"]
+
+Converted["_ButtonBG2"].AutoButtonColor = false
+Converted["_ButtonBG2"].Active = false
+Converted["_ButtonBG2"].BackgroundColor3 = Color3.fromRGB(234.00000125169754, 234.00000125169754, 234.00000125169754)
+Converted["_ButtonBG2"].Position = UDim2.new(0.45377779, -79, 1.76873684, -30)
+Converted["_ButtonBG2"].Selectable = false
+Converted["_ButtonBG2"].Size = UDim2.new(0, 34, 0, 10)
+Converted["_ButtonBG2"].Name = "ButtonBG"
+Converted["_ButtonBG2"].Parent = Converted["_noclip"]
+
+Converted["_crcl2"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_crcl2"].BorderColor3 = Color3.fromRGB(85.0000025331974, 172.00000494718552, 254.00001525878906)
+Converted["_crcl2"].Position = UDim2.new(-0.074000001, 0, -0.181999996, 0)
+Converted["_crcl2"].Size = UDim2.new(0, 13, 0, 13)
+Converted["_crcl2"].Name = "crcl"
+Converted["_crcl2"].Parent = Converted["_ButtonBG2"]
+
+Converted["_UICorner4"].CornerRadius = UDim.new(0, 100)
+Converted["_UICorner4"].Parent = Converted["_crcl2"]
+
+Converted["_Status2"].Name = "Status"
+Converted["_Status2"].Parent = Converted["_ButtonBG2"]
+
+Converted["_UICorner5"].CornerRadius = UDim.new(1, 0)
+Converted["_UICorner5"].Parent = Converted["_ButtonBG2"]
+
+Converted["_keybind2"].Font = Enum.Font.Code
+Converted["_keybind2"].Text = "[ C ]"
+Converted["_keybind2"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_keybind2"].TextSize = 13
+Converted["_keybind2"].TextTransparency = 0.23999999463558197
+Converted["_keybind2"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_keybind2"].BackgroundTransparency = 1
+Converted["_keybind2"].Position = UDim2.new(1.02083337, 0, -0.000368420035, 0)
+Converted["_keybind2"].Size = UDim2.new(0, 64, 0, 19)
+Converted["_keybind2"].Name = "keybind"
+Converted["_keybind2"].Parent = Converted["_noclip"]
+
+Converted["_TextButton"].Font = Enum.Font.Code
+Converted["_TextButton"].Text = "respawn"
+Converted["_TextButton"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextButton"].TextSize = 14
+Converted["_TextButton"].TextTransparency = 0.23999999463558197
+Converted["_TextButton"].AutoButtonColor = false
+Converted["_TextButton"].BackgroundColor3 = Color3.fromRGB(43.00000123679638, 42.000001296401024, 51.00000075995922)
+Converted["_TextButton"].BorderSizePixel = 0
+Converted["_TextButton"].Position = UDim2.new(0.0179211497, 0, 0.924242437, 0)
+Converted["_TextButton"].Size = UDim2.new(0, 128, 0, 17)
+Converted["_TextButton"].Parent = Converted["_mainFrame"]
+
+Converted["_visualFrame"].BackgroundColor3 = Color3.fromRGB(43.00000123679638, 42.000001296401024, 51.000004559755325)
+Converted["_visualFrame"].BorderSizePixel = 0
+Converted["_visualFrame"].Position = UDim2.new(0.0139372293, 0, 0.0109665683, 0)
+Converted["_visualFrame"].Size = UDim2.new(0, 279, 0, 330)
+Converted["_visualFrame"].Visible = false
+Converted["_visualFrame"].Name = "visualFrame"
+Converted["_visualFrame"].Parent = Converted["_dector"]
+
+Converted["_decor21"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_decor21"].BackgroundTransparency = 0.800000011920929
+Converted["_decor21"].BorderSizePixel = 0
+Converted["_decor21"].Position = UDim2.new(0.0179211479, 0, 0.0303030275, 0)
+Converted["_decor21"].Size = UDim2.new(0, 268, 0, 1)
+Converted["_decor21"].Name = "decor2"
+Converted["_decor21"].Parent = Converted["_visualFrame"]
+
+Converted["_TextLabel4"].Font = Enum.Font.SourceSans
+Converted["_TextLabel4"].Text = "visual tab"
+Converted["_TextLabel4"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel4"].TextSize = 14
+Converted["_TextLabel4"].TextTransparency = 0.6000000238418579
+Converted["_TextLabel4"].BackgroundColor3 = Color3.fromRGB(43.00000123679638, 42.000001296401024, 51.000004559755325)
+Converted["_TextLabel4"].BorderSizePixel = 0
+Converted["_TextLabel4"].Position = UDim2.new(0.354477614, 0, -9, 0)
+Converted["_TextLabel4"].Size = UDim2.new(0, 75, 0, 19)
+Converted["_TextLabel4"].Parent = Converted["_decor21"]
+
+Converted["_esp"].Font = Enum.Font.Code
+Converted["_esp"].Text = "player esp"
+Converted["_esp"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_esp"].TextSize = 13
+Converted["_esp"].TextTransparency = 0.23999999463558197
+Converted["_esp"].BackgroundColor3 = Color3.fromRGB(42.000001296401024, 42.000001296401024, 42.000001296401024)
+Converted["_esp"].BackgroundTransparency = 1
+Converted["_esp"].BorderSizePixel = 0
+Converted["_esp"].Position = UDim2.new(0.11108961, 0, 0.0887878761, 0)
+Converted["_esp"].Size = UDim2.new(0, 144, 0, 19)
+Converted["_esp"].Name = "esp"
+Converted["_esp"].Parent = Converted["_visualFrame"]
+
+Converted["_ButtonBG3"].AutoButtonColor = false
+Converted["_ButtonBG3"].Active = false
+Converted["_ButtonBG3"].BackgroundColor3 = Color3.fromRGB(234.00000125169754, 234.00000125169754, 234.00000125169754)
+Converted["_ButtonBG3"].Position = UDim2.new(0.45377779, -79, 1.76873684, -30)
+Converted["_ButtonBG3"].Selectable = false
+Converted["_ButtonBG3"].Size = UDim2.new(0, 34, 0, 10)
+Converted["_ButtonBG3"].Name = "ButtonBG"
+Converted["_ButtonBG3"].Parent = Converted["_esp"]
+
+Converted["_crcl3"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_crcl3"].BorderColor3 = Color3.fromRGB(85.0000025331974, 172.00000494718552, 254.00001525878906)
+Converted["_crcl3"].Position = UDim2.new(-0.074000001, 0, -0.181999996, 0)
+Converted["_crcl3"].Size = UDim2.new(0, 13, 0, 13)
+Converted["_crcl3"].Name = "crcl"
+Converted["_crcl3"].Parent = Converted["_ButtonBG3"]
+
+Converted["_UICorner6"].CornerRadius = UDim.new(0, 100)
+Converted["_UICorner6"].Parent = Converted["_crcl3"]
+
+Converted["_Status3"].Name = "Status"
+Converted["_Status3"].Parent = Converted["_ButtonBG3"]
+
+Converted["_UICorner7"].CornerRadius = UDim.new(1, 0)
+Converted["_UICorner7"].Parent = Converted["_ButtonBG3"]
+
+Converted["_maxzoom"].Font = Enum.Font.Code
+Converted["_maxzoom"].Text = "max zoom"
+Converted["_maxzoom"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_maxzoom"].TextSize = 13
+Converted["_maxzoom"].TextTransparency = 0.23999999463558197
+Converted["_maxzoom"].BackgroundColor3 = Color3.fromRGB(42.000001296401024, 42.000001296401024, 42.000001296401024)
+Converted["_maxzoom"].BackgroundTransparency = 1
+Converted["_maxzoom"].BorderSizePixel = 0
+Converted["_maxzoom"].Position = UDim2.new(0.111000001, 0, 0.257999986, 0)
+Converted["_maxzoom"].Size = UDim2.new(0, 144, 0, 19)
+Converted["_maxzoom"].Name = "maxzoom"
+Converted["_maxzoom"].Parent = Converted["_visualFrame"]
+
+Converted["_ButtonBG4"].AutoButtonColor = false
+Converted["_ButtonBG4"].Active = false
+Converted["_ButtonBG4"].BackgroundColor3 = Color3.fromRGB(234.00000125169754, 234.00000125169754, 234.00000125169754)
+Converted["_ButtonBG4"].Position = UDim2.new(0.45377779, -79, 1.76873684, -30)
+Converted["_ButtonBG4"].Selectable = false
+Converted["_ButtonBG4"].Size = UDim2.new(0, 34, 0, 10)
+Converted["_ButtonBG4"].Name = "ButtonBG"
+Converted["_ButtonBG4"].Parent = Converted["_maxzoom"]
+
+Converted["_crcl4"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_crcl4"].BorderColor3 = Color3.fromRGB(85.0000025331974, 172.00000494718552, 254.00001525878906)
+Converted["_crcl4"].Position = UDim2.new(-0.074000001, 0, -0.181999996, 0)
+Converted["_crcl4"].Size = UDim2.new(0, 13, 0, 13)
+Converted["_crcl4"].Name = "crcl"
+Converted["_crcl4"].Parent = Converted["_ButtonBG4"]
+
+Converted["_UICorner8"].CornerRadius = UDim.new(0, 100)
+Converted["_UICorner8"].Parent = Converted["_crcl4"]
+
+Converted["_Status4"].Name = "Status"
+Converted["_Status4"].Parent = Converted["_ButtonBG4"]
+
+Converted["_UICorner9"].CornerRadius = UDim.new(1, 0)
+Converted["_UICorner9"].Parent = Converted["_ButtonBG4"]
+
+Converted["_TextLabel5"].Font = Enum.Font.SourceSans
+Converted["_TextLabel5"].Text = "[DETECTABLE]"
+Converted["_TextLabel5"].TextColor3 = Color3.fromRGB(185.00000417232513, 41.00000135600567, 41.00000135600567)
+Converted["_TextLabel5"].TextSize = 14
+Converted["_TextLabel5"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel5"].BackgroundTransparency = 1
+Converted["_TextLabel5"].Position = UDim2.new(0.861111104, 0, 0.0526315793, 0)
+Converted["_TextLabel5"].Size = UDim2.new(0, 91, 0, 16)
+Converted["_TextLabel5"].Parent = Converted["_maxzoom"]
+
+Converted["_fullbright"].Font = Enum.Font.Code
+Converted["_fullbright"].Text = "fullbright"
+Converted["_fullbright"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_fullbright"].TextSize = 13
+Converted["_fullbright"].TextTransparency = 0.23999999463558197
+Converted["_fullbright"].BackgroundColor3 = Color3.fromRGB(42.000001296401024, 42.000001296401024, 42.000001296401024)
+Converted["_fullbright"].BackgroundTransparency = 1
+Converted["_fullbright"].BorderSizePixel = 0
+Converted["_fullbright"].Position = UDim2.new(0.11458423, 0, 0.346272707, 0)
+Converted["_fullbright"].Size = UDim2.new(0, 144, 0, 19)
+Converted["_fullbright"].Name = "fullbright"
+Converted["_fullbright"].Parent = Converted["_visualFrame"]
+
+Converted["_ButtonBG5"].AutoButtonColor = false
+Converted["_ButtonBG5"].Active = false
+Converted["_ButtonBG5"].BackgroundColor3 = Color3.fromRGB(234.00000125169754, 234.00000125169754, 234.00000125169754)
+Converted["_ButtonBG5"].Position = UDim2.new(0.45377779, -79, 1.76873684, -30)
+Converted["_ButtonBG5"].Selectable = false
+Converted["_ButtonBG5"].Size = UDim2.new(0, 34, 0, 10)
+Converted["_ButtonBG5"].Name = "ButtonBG"
+Converted["_ButtonBG5"].Parent = Converted["_fullbright"]
+
+Converted["_crcl5"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_crcl5"].BorderColor3 = Color3.fromRGB(85.0000025331974, 172.00000494718552, 254.00001525878906)
+Converted["_crcl5"].Position = UDim2.new(-0.074000001, 0, -0.181999996, 0)
+Converted["_crcl5"].Size = UDim2.new(0, 13, 0, 13)
+Converted["_crcl5"].Name = "crcl"
+Converted["_crcl5"].Parent = Converted["_ButtonBG5"]
+
+Converted["_UICorner10"].CornerRadius = UDim.new(0, 100)
+Converted["_UICorner10"].Parent = Converted["_crcl5"]
+
+Converted["_Status5"].Name = "Status"
+Converted["_Status5"].Parent = Converted["_ButtonBG5"]
+
+Converted["_UICorner11"].CornerRadius = UDim.new(1, 0)
+Converted["_UICorner11"].Parent = Converted["_ButtonBG5"]
+
+Converted["_TextLabel6"].Font = Enum.Font.SourceSans
+Converted["_TextLabel6"].Text = "[DETECTABLE]"
+Converted["_TextLabel6"].TextColor3 = Color3.fromRGB(185.00000417232513, 41.00000135600567, 41.00000135600567)
+Converted["_TextLabel6"].TextSize = 14
+Converted["_TextLabel6"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel6"].BackgroundTransparency = 1
+Converted["_TextLabel6"].Position = UDim2.new(0.854166687, 0, 0.157894731, 0)
+Converted["_TextLabel6"].Size = UDim2.new(0, 91, 0, 16)
+Converted["_TextLabel6"].Parent = Converted["_fullbright"]
+
+Converted["_healthbar"].Font = Enum.Font.SourceSans
+Converted["_healthbar"].Text = ""
+Converted["_healthbar"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_healthbar"].TextSize = 14
+Converted["_healthbar"].AutoButtonColor = false
+Converted["_healthbar"].AnchorPoint = Vector2.new(0.5, 0.5)
+Converted["_healthbar"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_healthbar"].BackgroundTransparency = 0.949999988079071
+Converted["_healthbar"].BorderSizePixel = 0
+Converted["_healthbar"].Position = UDim2.new(0.406585991, 0, 0.183333337, 0)
+Converted["_healthbar"].Size = UDim2.new(0.695788503, 0, 0.0242424235, 0)
+Converted["_healthbar"].Name = "healthbar"
+Converted["_healthbar"].Parent = Converted["_visualFrame"]
+
+Converted["_Bar2"].BackgroundColor3 = Color3.fromRGB(110.00000864267349, 129.00000751018524, 255)
+Converted["_Bar2"].BorderSizePixel = 0
+Converted["_Bar2"].Size = UDim2.new(0.5, 0, 1, 0)
+Converted["_Bar2"].Name = "Bar"
+Converted["_Bar2"].Parent = Converted["_healthbar"]
+
+Converted["_Fire2"].Name = "Fire"
+Converted["_Fire2"].Parent = Converted["_healthbar"]
+
+Converted["_TextLabel7"].Font = Enum.Font.SourceSans
+Converted["_TextLabel7"].Text = "10"
+Converted["_TextLabel7"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel7"].TextSize = 14
+Converted["_TextLabel7"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TextLabel7"].BackgroundTransparency = 1
+Converted["_TextLabel7"].Position = UDim2.new(1.06871879, 0, -0.108333349, 0)
+Converted["_TextLabel7"].Size = UDim2.new(0, 42, 0, 8)
+Converted["_TextLabel7"].Parent = Converted["_healthbar"]
+
+Converted["_section"].BackgroundColor3 = Color3.fromRGB(37.00000159442425, 36.00000165402889, 44.000001177191734)
+Converted["_section"].BorderSizePixel = 0
+Converted["_section"].Position = UDim2.new(0.0170440171, 0, 0.0492227599, 0)
+Converted["_section"].Size = UDim2.new(0, 287, 0, 23)
+Converted["_section"].Name = "section"
+Converted["_section"].Parent = Converted["_Frame"]
+
+Converted["_visual"].Font = Enum.Font.SourceSans
+Converted["_visual"].Text = "visual"
+Converted["_visual"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_visual"].TextSize = 14
+Converted["_visual"].TextTransparency = 0.23999999463558197
+Converted["_visual"].AutoButtonColor = false
+Converted["_visual"].Active = false
+Converted["_visual"].BackgroundColor3 = Color3.fromRGB(43.00000123679638, 42.000001296401024, 51.00000075995922)
+Converted["_visual"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_visual"].BorderSizePixel = 0
+Converted["_visual"].Position = UDim2.new(0.5, 1, 0.0520000011, 0)
+Converted["_visual"].Selectable = false
+Converted["_visual"].Size = UDim2.new(0, 140, 0, 20)
+Converted["_visual"].Name = "visual"
+Converted["_visual"].Parent = Converted["_section"]
+
+Converted["_Frame1"].AnchorPoint = Vector2.new(0.5, 0)
+Converted["_Frame1"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Frame1"].BackgroundTransparency = 0.5
+Converted["_Frame1"].BorderSizePixel = 0
+Converted["_Frame1"].Position = UDim2.new(0.5, 0, 1, 0)
+Converted["_Frame1"].Size = UDim2.new(0, 0, 0, 1)
+Converted["_Frame1"].Parent = Converted["_visual"]
+
+Converted["_main"].Font = Enum.Font.SourceSans
+Converted["_main"].Text = "main"
+Converted["_main"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_main"].TextSize = 14
+Converted["_main"].TextTransparency = 0.23999999463558197
+Converted["_main"].AutoButtonColor = false
+Converted["_main"].Active = false
+Converted["_main"].BackgroundColor3 = Color3.fromRGB(43.00000123679638, 42.000001296401024, 51.00000075995922)
+Converted["_main"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_main"].BorderSizePixel = 0
+Converted["_main"].Position = UDim2.new(0.0104529615, 0, 0.051547505, 0)
+Converted["_main"].Selectable = false
+Converted["_main"].Size = UDim2.new(0, 140, 0, 20)
+Converted["_main"].Name = "main"
+Converted["_main"].Parent = Converted["_section"]
+
+Converted["_Frame2"].AnchorPoint = Vector2.new(0.5, 0)
+Converted["_Frame2"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Frame2"].BackgroundTransparency = 0.5
+Converted["_Frame2"].BorderSizePixel = 0
+Converted["_Frame2"].Position = UDim2.new(0.5, 0, 1, 0)
+Converted["_Frame2"].Size = UDim2.new(0, 0, 0, 1)
+Converted["_Frame2"].Parent = Converted["_main"]
+
+Converted["_skid"].Font = Enum.Font.Code
+Converted["_skid"].Text = "skid"
+Converted["_skid"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_skid"].TextSize = 13
+Converted["_skid"].TextXAlignment = Enum.TextXAlignment.Right
+Converted["_skid"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_skid"].BackgroundTransparency = 1
+Converted["_skid"].Position = UDim2.new(0.0134227676, 0, 0, 0)
+Converted["_skid"].Size = UDim2.new(0, 36, 0, 18)
+Converted["_skid"].Name = "skid"
+Converted["_skid"].Parent = Converted["_Frame"]
+
+Converted["_sense"].Font = Enum.Font.Code
+Converted["_sense"].Text = "sense.gg"
+Converted["_sense"].TextColor3 = Color3.fromRGB(110.00000104308128, 129.00000751018524, 255)
+Converted["_sense"].TextSize = 13
+Converted["_sense"].TextXAlignment = Enum.TextXAlignment.Left
+Converted["_sense"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_sense"].BackgroundTransparency = 1
+Converted["_sense"].Position = UDim2.new(0.134228036, 0, 0, 0)
+Converted["_sense"].Size = UDim2.new(0, 36, 0, 18)
+Converted["_sense"].Name = "sense"
+Converted["_sense"].Parent = Converted["_Frame"]
+
+Converted["_note"].Font = Enum.Font.Code
+Converted["_note"].Text = "-  universal"
+Converted["_note"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_note"].TextSize = 11
+Converted["_note"].TextXAlignment = Enum.TextXAlignment.Left
+Converted["_note"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_note"].BackgroundTransparency = 1
+Converted["_note"].Position = UDim2.new(0.369127423, 0, 0, 0)
+Converted["_note"].Size = UDim2.new(0, 51, 0, 18)
+Converted["_note"].Name = "note"
+Converted["_note"].Parent = Converted["_Frame"]
+
+Converted["_loaded"].Font = Enum.Font.Code
+Converted["_loaded"].Text = "loaded: "
+Converted["_loaded"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_loaded"].TextSize = 12
+Converted["_loaded"].TextXAlignment = Enum.TextXAlignment.Left
+Converted["_loaded"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_loaded"].BackgroundTransparency = 1
+Converted["_loaded"].Position = UDim2.new(0.624161005, 0, 0.901554406, 0)
+Converted["_loaded"].Size = UDim2.new(0, 51, 0, 18)
+Converted["_loaded"].Name = "loaded"
+Converted["_loaded"].Parent = Converted["_Frame"]
+
+Converted["_krnl"].Font = Enum.Font.Code
+Converted["_krnl"].Text = "krnl"
+Converted["_krnl"].TextColor3 = Color3.fromRGB(255, 120.00000804662704, 120.00000804662704)
+Converted["_krnl"].TextSize = 12
+Converted["_krnl"].TextXAlignment = Enum.TextXAlignment.Left
+Converted["_krnl"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_krnl"].BackgroundTransparency = 1
+Converted["_krnl"].Position = UDim2.new(0.775167763, 0, 0.901554406, 0)
+Converted["_krnl"].Size = UDim2.new(0, 51, 0, 18)
+Converted["_krnl"].Visible = false
+Converted["_krnl"].Name = "krnl"
+Converted["_krnl"].Parent = Converted["_Frame"]
+
+Converted["_synapse"].Font = Enum.Font.Code
+Converted["_synapse"].Text = "synapse"
+Converted["_synapse"].TextColor3 = Color3.fromRGB(255, 187.00000405311584, 92.00000211596489)
+Converted["_synapse"].TextSize = 12
+Converted["_synapse"].TextXAlignment = Enum.TextXAlignment.Left
+Converted["_synapse"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_synapse"].BackgroundTransparency = 1
+Converted["_synapse"].Position = UDim2.new(0.775167763, 0, 0.901554406, 0)
+Converted["_synapse"].Size = UDim2.new(0, 51, 0, 18)
+Converted["_synapse"].Visible = false
+Converted["_synapse"].Name = "synapse"
+Converted["_synapse"].Parent = Converted["_Frame"]
+
+Converted["_unknown"].Font = Enum.Font.Code
+Converted["_unknown"].Text = "UNKNOWN"
+Converted["_unknown"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_unknown"].TextSize = 13
+Converted["_unknown"].TextXAlignment = Enum.TextXAlignment.Left
+Converted["_unknown"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_unknown"].BackgroundTransparency = 1
+Converted["_unknown"].Position = UDim2.new(0.775167763, 0, 0.901554406, 0)
+Converted["_unknown"].Size = UDim2.new(0, 51, 0, 18)
+Converted["_unknown"].Name = "unknown"
+Converted["_unknown"].Parent = Converted["_Frame"]
+
+Converted["_Shadow"].Image = "rbxassetid://4996891970"
+Converted["_Shadow"].ImageColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_Shadow"].ScaleType = Enum.ScaleType.Slice
+Converted["_Shadow"].SliceCenter = Rect.new(23, 23, 277, 277)
+Converted["_Shadow"].AnchorPoint = Vector2.new(0.5, 0.5)
+Converted["_Shadow"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_Shadow"].BackgroundTransparency = 1
+Converted["_Shadow"].Position = UDim2.new(0.5, 0, 0.5, 0)
+Converted["_Shadow"].Size = UDim2.new(1, 30, 1, 30)
+Converted["_Shadow"].Name = "Shadow"
+Converted["_Shadow"].Parent = Converted["_Frame"]
+
+-- Fake Module Scripts:
+
+local fake_module_scripts = {}
+
+
+-- Fake Local Scripts:
+
+local function SYMHWGF_fake_script() -- Fake Script: StarterGui.ScreenGui.Frame.dector.mainFrame.Flight.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_Flight"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	pcall(function()
+	
+	local Status = script.Parent.ButtonBG:WaitForChild("Status")
+	local name = math.random(1,5000)
+	local Player = game:GetService("Players").LocalPlayer
+	
+	local configs = {
+		DisabledPos = UDim2.new(-0.074, 0,-0.182, 0),
+		EnabledPos = UDim2.new(0.603, 0,-0.182, 0),
+	
+		EnabledBGCol = Color3.fromRGB(110, 129, 255),
+		DisabledBGCol = Color3.fromRGB(234, 234, 234)
+	}
+	
+	local function create()
+		part = Instance.new("Part",workspace)
+		part.Name = name
+		part.Anchored = true
+		part.Size = Vector3.new(3, 2, 3)
+		part.Transparency = 1
+		lol = pcall(function()
+			rss = game:GetService("RunService").RenderStepped:Connect(function()
+				if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+					part.CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(0, -4, 0)
+				end
+			end)
+		end)
+	end
+	
+	local function enabled()
+		game:GetService("TweenService"):Create(Status.Parent.crcl, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = configs.EnabledPos}):Play()
+		game:GetService("TweenService"):Create(Status.Parent, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = configs.EnabledBGCol}):Play()	
+	end
+	
+	local function disable()
+		game:GetService("TweenService"):Create(Status.Parent.crcl, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = configs.DisabledPos}):Play()
+		game:GetService("TweenService"):Create(Status.Parent, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = configs.DisabledBGCol}):Play()	
+	end
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		if Status.Value then Status.Value = false return end
+		Status.Value = true
+		getgenv().FlightEnabled = true
+	end)
+	
+	Status:GetPropertyChangedSignal("Value"):Connect(function()
+		if Status.Value then enabled() return end
+		disable()
+		getgenv().FlightEnabled = false
+		rss:Disconnect()
+		part:Destroy()
+	end)
+	
+	game:GetService("UserInputService").InputBegan:connect(function(input, gameProcessedevent)
+		if input.KeyCode == getgenv().flykey and getgenv().FlightEnabled == false then
+			if gameProcessedevent then return end 
+			Status.Value = true
+			getgenv().FlightEnabled = true
+			create()
+			enabled()
+		elseif input.KeyCode == getgenv().flykey and getgenv().FlightEnabled then
+			if gameProcessedevent then return end 
+			getgenv().FlightEnabled = false
+			disable()
+			part:Destroy()
+			rss:Disconnect()
+		end
+	end)
+	
+	game:GetService("UserInputService").InputBegan:Connect(function(input)
+		if (input.KeyCode == Enum.KeyCode.W) then 
+			Keys.W = 1
+		end;
+		if (input.KeyCode == Enum.KeyCode.A) then 
+			Keys.A = 1
+		end;
+		if (input.KeyCode == Enum.KeyCode.S) then 
+			Keys.S = 1
+		end;
+		if (input.KeyCode == Enum.KeyCode.D) then 
+			Keys.D = 1
+		end;
+	end)
+	
+	game:GetService("UserInputService").InputEnded:Connect(function(input)
+		if (input.KeyCode == Enum.KeyCode.W) then 
+			Keys.W = 0
+		end;
+		if (input.KeyCode == Enum.KeyCode.A) then 
+			Keys.A = 0
+		end;
+		if (input.KeyCode == Enum.KeyCode.S) then 
+			Keys.S = 0
+		end;
+		if (input.KeyCode == Enum.KeyCode.D) then 
+			Keys.D = 0
+		end;
+	end)
+	
+	
+	
+	game:GetService("RunService").Stepped:Connect(function()
+		if getgenv().FlightEnabled and Player.Character and Player.Character:FindFirstChild("HumanoidRootPart") and Player.Character:FindFirstChild("Torso") then 
+				boob = (camera.CFrame.RightVector * (Keys.D - Keys.A) + camera.CFrame.LookVector * (Keys.W - Keys.S));
+			Player.Character.HumanoidRootPart.Velocity = (boob * script.Parent.Parent.flightSlider.TextLabel.Text)
+		end;
+	end)
+	
+	end)
+end
+local function LVXWTQM_fake_script() -- Fake Script: StarterGui.ScreenGui.Frame.dector.mainFrame.Flight.keybind.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_keybind"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	pcall(function()
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.Text = "[...]"
+		bbdidjhf = game:GetService("UserInputService").InputBegan:Connect(function(key)
+			local keykey = tostring(key.KeyCode)
+			local keyfix = string.split(keykey,".")
+			script.Parent.Text = "[ "..keyfix[3].." ]"
+			bbdidjhf:Disconnect()
+			getgenv().flykey = key.KeyCode
+		end)
+		end)
+	end)
+end
+local function NGJMYF_fake_script() -- Fake Script: StarterGui.ScreenGui.Frame.dector.mainFrame.flightSlider.SliderManager
+    local script = Instance.new("LocalScript")
+    script.Name = "SliderManager"
+    script.Parent = Converted["_flightSlider"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	pcall(function()
+	local max = script.Parent
+	local fire = max.Fire
+	local bar = max.Bar
+	local player = game.Players.LocalPlayer
+	local mouse = player:GetMouse()
+	local uis = game:GetService("UserInputService")
+	local ap = Vector2.new(max.AbsolutePosition.X, max.AbsolutePosition.Y)
+	local as = Vector2.new(max.AbsoluteSize.X, max.AbsoluteSize.Y)
+	local down = false
+	
+	max.MouseButton1Down:Connect(function()
+		local ap = Vector2.new(max.AbsolutePosition.X, max.AbsolutePosition.Y)
+		local as = Vector2.new(max.AbsoluteSize.X, max.AbsoluteSize.Y)
+			
+		bar.Size = UDim2.new(0, (mouse.X - ap.X), 1, 0)
+		fire.Value = true
+		down = true
+	 	
+	end)
+	
+	uis.InputEnded:Connect(function(input, gp)
+		
+		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			
+			down = false
+			fire.Value = false
+		
+		end
+		
+	end)
+	
+	mouse.Move:Connect(function()
+		local ap = Vector2.new(max.AbsolutePosition.X, max.AbsolutePosition.Y)
+		local as = Vector2.new(max.AbsoluteSize.X, max.AbsoluteSize.Y)
+		local x = mouse.X
+		
+		if down == true then
+			
+			fire.Value = false
+			fire.Value = true
+			
+			if mouse.X < ap.X then
+				
+				bar.Size = UDim2.new(0, 0, 1, 0)
+				
+			elseif mouse.X > (ap.X + as.X) then
+				
+				bar.Size = UDim2.new(0, as.X, 1, 0)
+			
+			else
+				
+				bar.Size = UDim2.new(0, (mouse.X - ap.X), 1, 0)
+				
+			end
+				
+		end
+		
+	end)
+	end)
+end
+local function OKYFYS_fake_script() -- Fake Script: StarterGui.ScreenGui.Frame.dector.mainFrame.flightSlider.TextLabel.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_TextLabel1"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	local textB = script.Parent
+	local frame = textB.Parent
+	local max = frame.Bar
+	local fire = frame.Fire
+	local bar = max
+	local as = Vector2.new(max.AbsoluteSize.X, max.AbsoluteSize.Y)
+	
+	fire.Changed:Connect(function()
+	
+		if fire.Value == true then
+	
+			local maxSize = as.X
+			local size = bar.Size.X.Offset
+			local num = (size / maxSize)
+			local num100 = (100 * (size / maxSize)) * 1
+	
+			textB.Text = math.floor(num100)
+	
+		end
+	end)
+end
+local function EPEMZTH_fake_script() -- Fake Script: StarterGui.ScreenGui.Frame.dector.mainFrame.walkSlider.SliderManager
+    local script = Instance.new("LocalScript")
+    script.Name = "SliderManager"
+    script.Parent = Converted["_walkSlider"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	pcall(function()
+	local max = script.Parent
+	local fire = max.Fire
+	local bar = max.Bar
+	local player = game.Players.LocalPlayer
+	local mouse = player:GetMouse()
+	local uis = game:GetService("UserInputService")
+	local ap = Vector2.new(max.AbsolutePosition.X, max.AbsolutePosition.Y)
+	local as = Vector2.new(max.AbsoluteSize.X, max.AbsoluteSize.Y)
+	local down = false
+	
+	max.MouseButton1Down:Connect(function()
+		local ap = Vector2.new(max.AbsolutePosition.X, max.AbsolutePosition.Y)
+		local as = Vector2.new(max.AbsoluteSize.X, max.AbsoluteSize.Y)
+			
+		bar.Size = UDim2.new(0, (mouse.X - ap.X), 1, 0)
+		fire.Value = true
+		down = true
+	 	
+	end)
+	
+	uis.InputEnded:Connect(function(input, gp)
+		
+		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			
+			down = false
+			fire.Value = false
+		
+		end
+		
+	end)
+	
+	mouse.Move:Connect(function()
+		local ap = Vector2.new(max.AbsolutePosition.X, max.AbsolutePosition.Y)
+		local as = Vector2.new(max.AbsoluteSize.X, max.AbsoluteSize.Y)
+		local x = mouse.X
+		
+		if down == true then
+			
+			fire.Value = false
+			fire.Value = true
+			
+			if mouse.X < ap.X then
+				
+				bar.Size = UDim2.new(0, 0, 1, 0)
+				
+			elseif mouse.X > (ap.X + as.X) then
+				
+				bar.Size = UDim2.new(0, as.X, 1, 0)
+			
+			else
+				
+				bar.Size = UDim2.new(0, (mouse.X - ap.X), 1, 0)
+				
+			end
+				
+		end
+		
+	end)
+	end)
+end
+local function VXPN_fake_script() -- Fake Script: StarterGui.ScreenGui.Frame.dector.mainFrame.walkSlider.TextLabel.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_TextLabel2"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	pcall(function()
+	local textB = script.Parent
+	local frame = textB.Parent
+	local max = frame.Bar
+	local fire = frame.Fire
+	local bar = max
+	local as = Vector2.new(max.AbsoluteSize.X, max.AbsoluteSize.Y)
+	
+	fire.Changed:Connect(function()
+	
+		if fire.Value == true then
+	
+			local maxSize = as.X
+			local size = bar.Size.X.Offset
+			local num = (size / maxSize)
+	
+			textB.Text = math.floor((10 * (size / maxSize)) + 0.1) / 10
+	
+		end
+		end)
+	end)
+end
+local function NWVEKRU_fake_script() -- Fake Script: StarterGui.ScreenGui.Frame.dector.mainFrame.walkspeed.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_walkspeed"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	wait(1)
+	pcall(function()
+	wait(1)
+	local Status = script.Parent.ButtonBG:WaitForChild("Status")
+	local hum = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
+	local rs = game:GetService("RunService")
+	local root = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+	local UIS = game:GetService("UserInputService")
+	
+	local configs = {
+		DisabledPos = UDim2.new(-0.074, 0,-0.182, 0),
+		EnabledPos = UDim2.new(0.603, 0,-0.182, 0),
+	
+		EnabledBGCol = Color3.fromRGB(110, 129, 255),
+		DisabledBGCol = Color3.fromRGB(234, 234, 234)
+		}
+		
+	local function hey(key,ho)
+		if UIS.MouseBehavior == Enum.MouseBehavior.LockCenter and getgenv().walkspeed then
+				if UIS:IsKeyDown(key) then
+				root.CFrame = root.CFrame * ho
+			end
+		end
+		end
+		
+		spawn(function()
+			while wait() do
+				niceguy = tonumber(script.Parent.Parent.walkSlider.TextLabel.Text)
+			end
+		end)
+	
+	
+	local function enabled()
+		game:GetService("TweenService"):Create(Status.Parent.crcl, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = configs.EnabledPos}):Play()
+		game:GetService("TweenService"):Create(Status.Parent, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = configs.EnabledBGCol}):Play()	
+	end
+	
+	local function disable()
+		game:GetService("TweenService"):Create(Status.Parent.crcl, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = configs.DisabledPos}):Play()
+		game:GetService("TweenService"):Create(Status.Parent, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = configs.DisabledBGCol}):Play()	
+	end
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		if Status.Value then Status.Value = false return end
+		Status.Value = true
+		getgenv().walkspeed = true
+	end)
+	
+	Status:GetPropertyChangedSignal("Value"):Connect(function()
+		if Status.Value then enabled() return end
+		disable()
+		getgenv().walkspeed = false
+	end)
+	
+	
+	game:GetService("UserInputService").InputBegan:connect(function(input, gameProcessedevent)
+		if input.KeyCode == getgenv().walky and getgenv().walkspeed == false then
+			if gameProcessedevent then return end 
+			Status.Value = true
+			getgenv().walkspeed = true	
+			enabled()
+		elseif input.KeyCode == getgenv().walky and getgenv().walkspeed then
+			if gameProcessedevent then return end 
+			getgenv().walkspeed = false
+			disable()
+		end
+	end)
+		
+	rs.Stepped:Connect(function()
+		hey(Enum.KeyCode.W,CFrame.new(0,0,-niceguy))
+	end)
+	
+	rs.Stepped:Connect(function()
+		hey(Enum.KeyCode.S,CFrame.new(0,0,niceguy))
+	end)
+	
+	rs.Stepped:Connect(function()
+		hey(Enum.KeyCode.A,CFrame.new(-niceguy,0,0))
+	end)
+	
+	rs.Stepped:Connect(function()
+		hey(Enum.KeyCode.D,CFrame.new(niceguy,0,0))
+	end)
+			
+	rs.Stepped:Connect(function()
+		if UIS.MouseBehavior ~= Enum.MouseBehavior.LockCenter and hum.MoveDirection.Magnitude > 0 and getgenv().walkspeed then
+				root.CFrame = root.CFrame + root.CFrame.LookVector * 0.5
+			end
+		end)
+		
+		
+	end)
+end
+local function NDINI_fake_script() -- Fake Script: StarterGui.ScreenGui.Frame.dector.mainFrame.walkspeed.keybind.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_keybind1"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	pcall(function()
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.Text = "[...]"
+		bbdidjhf = game:GetService("UserInputService").InputBegan:Connect(function(key)
+			local keykey = tostring(key.KeyCode)
+			local keyfix = string.split(keykey,".")
+			script.Parent.Text = "[ "..keyfix[3].." ]"
+			bbdidjhf:Disconnect()
+			getgenv().walky = key.KeyCode
+		end)
+		end)
+	end)
+end
+local function PFQF_fake_script() -- Fake Script: StarterGui.ScreenGui.Frame.dector.mainFrame.noclip.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_noclip"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	pcall(function()
+	local Status = script.Parent.ButtonBG:WaitForChild("Status")
+	local torso = game.Players.LocalPlayer.Character:WaitForChild("Torso")
+	
+	local configs = {
+		DisabledPos = UDim2.new(-0.074, 0,-0.182, 0),
+		EnabledPos = UDim2.new(0.603, 0,-0.182, 0),
+	
+		EnabledBGCol = Color3.fromRGB(110, 129, 255),
+		DisabledBGCol = Color3.fromRGB(234, 234, 234)
+	}
+	
+	
+	local function enabled()
+		game:GetService("TweenService"):Create(Status.Parent.crcl, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = configs.EnabledPos}):Play()
+		game:GetService("TweenService"):Create(Status.Parent, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = configs.EnabledBGCol}):Play()	
+	end
+	
+	local function disable()
+		game:GetService("TweenService"):Create(Status.Parent.crcl, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = configs.DisabledPos}):Play()
+		game:GetService("TweenService"):Create(Status.Parent, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = configs.DisabledBGCol}):Play()	
+	end
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		if Status.Value then Status.Value = false return end
+		Status.Value = true
+		noclipen = true
+	end)
+	
+	
+	game:GetService("UserInputService").InputBegan:connect(function(input, gameProcessedevent)
+		if input.KeyCode == getgenv().noclipkey and getgenv().noclipen == false then
+			if gameProcessedevent then return end 
+			Status.Value = true
+			getgenv().noclipen = true
+			enabled()
+		elseif input.KeyCode == getgenv().noclipkey and getgenv().noclipen then
+			if gameProcessedevent then return end 
+			getgenv().noclipen = false
+			disable()
+			for _,v in pairs(game:GetDescendants()) do
+				if table.find(listpart, v) then
+					v.CanCollide = true
+					for _,item in pairs(listpart) do
+						listpart[item] = nil
+					end
+				end
+				if table.find(anchor, v) then
+					v.Anchored = false
+					for _,place in pairs(anchor) do
+						anchor[place] = nil
+					end
+				end
+			end
+		end
+	end)
+	
+	Status:GetPropertyChangedSignal("Value"):Connect(function()
+		if Status.Value then enabled() return end
+		disable()
+		getgenv().noclipen = false
+		for _,i in pairs(listpart) do
+			i.CanCollide = true
+		end
+		
+		for _,item in pairs(listpart) do
+			listpart[item] = nil
+		end
+		
+		for _,v in pairs(anchor) do
+			v.Anchored = false
+		end
+		
+		for _,place in pairs(anchor) do
+		anchor[place] = nil
+		end
+	end)
+		
+	torso.Touched:Connect(function(part)
+		if getgenv().noclipen and part.CanCollide == true and part.Name ~= name and part.Parent ~= "Live" and part.Parent.Parent ~= "Live" then
+			part.CanCollide = false
+			table.insert(listpart, part)
+		end
+			end)
+		
+	torso.Touched:Connect(function(part)
+		if getgenv().noclipen and not part:FindFirstChild("Humanoid") and part.Anchored == false and part.Name ~= name and part.Parent ~= "Live" and part.Parent.Parent ~= "Live" then
+			part.Anchored = true
+			table.insert(anchor, part)
+		end
+		end)
+		end)
+end
+local function UTWX_fake_script() -- Fake Script: StarterGui.ScreenGui.Frame.dector.mainFrame.noclip.keybind.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_keybind2"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	pcall(function()
+	script.Parent.MouseButton1Click:Connect(function()
+		script.Parent.Text = "[...]"
+		bbdidjhf = game:GetService("UserInputService").InputBegan:Connect(function(key)
+			local keykey = tostring(key.KeyCode)
+			local keyfix = string.split(keykey,".")
+			script.Parent.Text = "[ "..keyfix[3].." ]"
+			bbdidjhf:Disconnect()
+			getgenv().noclipkey = key.KeyCode
+		end)
+		end)
+	end)
+end
+local function SEIAX_fake_script() -- Fake Script: StarterGui.ScreenGui.Frame.dector.mainFrame.TextButton.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_TextButton"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	pcall(function()
+	script.Parent.MouseEnter:Connect(function()
+		local tween1 = game:GetService("TweenService"):Create(script.Parent, TweenInfo.new(.3), {BackgroundColor3 = Color3.fromRGB(97, 95, 115)}):Play()
+	end)
+	
+	script.Parent.MouseLeave:Connect(function()
+		local tween1 = game:GetService("TweenService"):Create(script.Parent, TweenInfo.new(.3), {BackgroundColor3 = Color3.fromRGB(43, 42, 51)}):Play()
+	end)
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		if game.Players.LocalPlayer.Character then
+			local hum = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
+			hum:ChangeState(15)
+		end
+		end)
+	end)
+end
+local function GEDU_fake_script() -- Fake Script: StarterGui.ScreenGui.Frame.dector.visualFrame.esp.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_esp"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	pcall(function()
+	local Status = script.Parent.ButtonBG:WaitForChild("Status")
+	green = Color3.fromRGB(0, 186, 80)
+	red = Color3.fromRGB(186, 88, 80)
+	
+	local configs = {
+		DisabledPos = UDim2.new(-0.074, 0,-0.182, 0),
+		EnabledPos = UDim2.new(0.603, 0,-0.182, 0),
+	
+		EnabledBGCol = Color3.fromRGB(110, 129, 255),
+		DisabledBGCol = Color3.fromRGB(234, 234, 234)
+	}
+	
+	
+	local function enabled()
+		game:GetService("TweenService"):Create(Status.Parent.crcl, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = configs.EnabledPos}):Play()
+		game:GetService("TweenService"):Create(Status.Parent, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = configs.EnabledBGCol}):Play()	
+	end
+	
+	local function disable()
+		game:GetService("TweenService"):Create(Status.Parent.crcl, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = configs.DisabledPos}):Play()
+		game:GetService("TweenService"):Create(Status.Parent, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = configs.DisabledBGCol}):Play()	
+	end
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		if Status.Value then Status.Value = false return end
+			Status.Value = true
+			getgenv().esp = true
+	end)
+	
+	Status:GetPropertyChangedSignal("Value"):Connect(function()
+		if Status.Value then enabled() return end
+			disable()
+			getgenv().esp = false
+	end)
+	
+	
+	local player = game:GetService("Players").LocalPlayer
+	local camera = game:GetService("Workspace").CurrentCamera
+	local mouse = player:GetMouse()
+	
+	local function ESP(plr)
+		local left,right,top,bottom,healthbar,name = Drawing.new("Line"),Drawing.new("Line"),Drawing.new("Line"),Drawing.new("Line"),Drawing.new("Line"),Drawing.new("Text")
+		left.Thickness = 2
+		right.Thickness = 2
+		bottom.Thickness = 2
+		top.Thickness = 2
+		left.Color = Color3.fromRGB(185,185,185)
+		right.Color = Color3.fromRGB(185,185,185)
+		bottom.Color = Color3.fromRGB(185,185,185)
+		top.Color = Color3.fromRGB(185,185,185)
+		healthbar.Thickness = 10
+		name.Outline = true
+		name.Color = Color3.fromRGB(255,255,255)
+		name.Size = 12
+		name.Font = 2
+			name.Center = true
+			game:GetService("RunService").RenderStepped:Connect(function()
+				if not game.Players:FindFirstChild(plr.Name) then
+					left.Visible = false
+					right.Visible = false
+					top.Visible = false
+					bottom.Visible = false
+					healthbar.Visible = false
+					name.Visible = false
+				end
+			end)
+		
+		local function Updater()
+			local connection
+			connection = game:GetService("RunService").RenderStepped:Connect(function()
+					if plr.Character ~= nil and plr.Character:FindFirstChild("Humanoid") and plr.Character:FindFirstChild("HumanoidRootPart") and plr.Character.Humanoid.Health > 0 and plr.Character:FindFirstChild("Head") and game.Players:FindFirstChild(plr.Name) then
+					local HumPos, OnScreen = camera:WorldToViewportPoint(plr.Character.HumanoidRootPart.Position)
+					if OnScreen then
+						local cal = workspace.CurrentCamera:WorldToViewportPoint(plr.Character.HumanoidRootPart.CFrame * CFrame.new(-2,3,0).p)
+						local cal2 = workspace.CurrentCamera:WorldToViewportPoint(plr.Character.HumanoidRootPart.CFrame * CFrame.new(2,3,0).p)
+						local cal3 = workspace.CurrentCamera:WorldToViewportPoint(plr.Character.HumanoidRootPart.CFrame * CFrame.new(-2,-3,0).p)
+						local cal4 = workspace.CurrentCamera:WorldToViewportPoint(plr.Character.HumanoidRootPart.CFrame * CFrame.new(2,-3,0).p)
+						local y = 6 / plr.Character.Humanoid.MaxHealth * plr.Character.Humanoid.Health
+						local fix = y - 3
+						local healthcal = workspace.CurrentCamera:WorldToViewportPoint(plr.Character.HumanoidRootPart.CFrame * CFrame.new(-3,fix,0).p)
+						local healthfrom = workspace.CurrentCamera:WorldToViewportPoint(plr.Character.HumanoidRootPart.CFrame * CFrame.new(-3,-3,0).p)
+						local botleft =  workspace.CurrentCamera:WorldToViewportPoint(plr.Character.HumanoidRootPart.CFrame * CFrame.new(-3.05,-3,0).p)
+						local topleft =  workspace.CurrentCamera:WorldToViewportPoint(plr.Character.HumanoidRootPart.CFrame * CFrame.new(-3.05,3,0).p)
+						local topright =  workspace.CurrentCamera:WorldToViewportPoint(plr.Character.HumanoidRootPart.CFrame * CFrame.new(-3,3,0).p)
+							local botright =  workspace.CurrentCamera:WorldToViewportPoint(plr.Character.HumanoidRootPart.CFrame * CFrame.new(-3,-3,0).p)
+							if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Head") then
+								magnitude = math.floor((game.Players.LocalPlayer.Character:FindFirstChild("Head").Position - plr.Character:FindFirstChild("Head").Position).Magnitude)
+								end
+						healthbar.Thickness = tonumber(script.Parent.Parent.healthbar.TextLabel.Text)
+	
+						left.From = Vector2.new(cal.X,cal.Y)
+						left.To = Vector2.new(cal3.X,cal3.Y)
+						left.Visible = getgenv().esp
+	
+						right.From = Vector2.new(cal.X,cal.Y)
+						right.To = Vector2.new(cal2.X,cal2.Y)
+						right.Visible = getgenv().esp
+	
+						top.From = Vector2.new(cal2.X,cal2.Y)
+						top.To = Vector2.new(cal4.X,cal4.Y)
+						top.Visible = getgenv().esp
+	
+						bottom.From = Vector2.new(cal3.X,cal3.Y)
+						bottom.To = Vector2.new(cal4.X,cal4.Y)
+						bottom.Visible = getgenv().esp
+	
+						healthbar.From = Vector2.new(healthfrom.X,healthfrom.Y)
+						healthbar.To = Vector2.new(healthcal.X,healthcal.Y)
+						healthbar.Color = red:lerp(green, plr.Character.Humanoid.Health/plr.Character.Humanoid.MaxHealth)
+						healthbar.Visible = getgenv().esp
+						
+							name.Visible = getgenv().esp
+							if game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Head") then
+								name.Text = plr.Name.." ["..math.floor(plr.Character.Humanoid.Health).." / "..plr.Character.Humanoid.MaxHealth.."] ".." [ "..magnitude.." ] "
+							end
+						name.Position = Vector2.new(HumPos.X,HumPos.Y)
+					else 
+						left.Visible = false
+						right.Visible = false
+						top.Visible = false
+						bottom.Visible = false
+						healthbar.Visible = false
+						name.Visible = false
+							if game.Players:FindFirstChild(plr.Name) == nil then
+								left.Visible = false
+								right.Visible = false
+								top.Visible = false
+								bottom.Visible = false
+								healthbar.Visible = false
+								name.Visible = false
+							end
+						end
+				end
+			end)
+		end
+		coroutine.wrap(Updater)()
+	end
+	
+	for i, v in pairs(game:GetService("Players"):GetPlayers()) do
+		if v.Name ~= player.Name then
+		coroutine.wrap(ESP)(v)
+		end
+	end
+	
+	game.Players.PlayerAdded:Connect(function(newplr)
+		if newplr.Name ~= player.Name then
+		coroutine.wrap(ESP)(newplr)
+		end
+	end)
+	end)
+end
+local function PDDFB_fake_script() -- Fake Script: StarterGui.ScreenGui.Frame.dector.visualFrame.maxzoom.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_maxzoom"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	pcall(function()
+	local Status = script.Parent.ButtonBG:WaitForChild("Status")
+	
+	local configs = {
+		DisabledPos = UDim2.new(-0.074, 0,-0.182, 0),
+		EnabledPos = UDim2.new(0.603, 0,-0.182, 0),
+	
+		EnabledBGCol = Color3.fromRGB(110, 129, 255),
+		DisabledBGCol = Color3.fromRGB(234, 234, 234)
+	}
+	
+	
+	local function enabled()
+		game:GetService("TweenService"):Create(Status.Parent.crcl, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = configs.EnabledPos}):Play()
+		game:GetService("TweenService"):Create(Status.Parent, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = configs.EnabledBGCol}):Play()	
+	end
+	
+	local function disable()
+		game:GetService("TweenService"):Create(Status.Parent.crcl, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = configs.DisabledPos}):Play()
+		game:GetService("TweenService"):Create(Status.Parent, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = configs.DisabledBGCol}):Play()	
+	end
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		if Status.Value then Status.Value = false return end
+		Status.Value = true
+		oldvalue = game:GetService("Players").LocalPlayer.CameraMaxZoomDistance
+		game:GetService("Players").LocalPlayer.CameraMaxZoomDistance = 9e9
+		game:GetService("Players").LocalPlayer.DevCameraOcclusionMode = Enum.DevCameraOcclusionMode.Invisicam
+	end)
+	
+	Status:GetPropertyChangedSignal("Value"):Connect(function()
+		if Status.Value then enabled() return end
+		disable()
+		game:GetService("Players").LocalPlayer.CameraMaxZoomDistance = oldvalue
+		game:GetService("Players").LocalPlayer.DevCameraOcclusionMode = Enum.DevCameraOcclusionMode.Zoom
+	end)
+	end)
+end
+local function STOAVL_fake_script() -- Fake Script: StarterGui.ScreenGui.Frame.dector.visualFrame.fullbright.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_fullbright"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	pcall(function()
+	local Status = script.Parent.ButtonBG:WaitForChild("Status")
+	
+	local configs = {
+		DisabledPos = UDim2.new(-0.074, 0,-0.182, 0),
+		EnabledPos = UDim2.new(0.603, 0,-0.182, 0),
+	
+		EnabledBGCol = Color3.fromRGB(110, 129, 255),
+		DisabledBGCol = Color3.fromRGB(234, 234, 234)
+	}
+	
+	
+	local function enabled()
+		game:GetService("TweenService"):Create(Status.Parent.crcl, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = configs.EnabledPos}):Play()
+		game:GetService("TweenService"):Create(Status.Parent, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = configs.EnabledBGCol}):Play()	
+	end
+	
+	local function disable()
+		game:GetService("TweenService"):Create(Status.Parent.crcl, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Position = configs.DisabledPos}):Play()
+		game:GetService("TweenService"):Create(Status.Parent, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {BackgroundColor3 = configs.DisabledBGCol}):Play()	
+	end
+	
+	script.Parent.MouseButton1Click:Connect(function()
+		if Status.Value then Status.Value = false return end
+		Status.Value = true
+	end)
+	
+	Status:GetPropertyChangedSignal("Value"):Connect(function()
+		if Status.Value then enabled() return end
+		disable()
+	end)
+	
+	while wait() do
+		if Status.Value == true then
+			game.Lighting.Brightness = 2
+			game.Lighting.ClockTime = 14
+			game.Lighting.FogEnd = 100000
+			game.Lighting.GlobalShadows = false
+			game.Lighting.OutdoorAmbient = Color3.fromRGB(128, 128, 128)
+		end
+		end
+	end)
+end
+local function WIXUNY_fake_script() -- Fake Script: StarterGui.ScreenGui.Frame.dector.visualFrame.healthbar.SliderManager
+    local script = Instance.new("LocalScript")
+    script.Name = "SliderManager"
+    script.Parent = Converted["_healthbar"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	pcall(function()
+	local max = script.Parent
+	local fire = max.Fire
+	local bar = max.Bar
+	local player = game.Players.LocalPlayer
+	local mouse = player:GetMouse()
+	local uis = game:GetService("UserInputService")
+	local ap = Vector2.new(max.AbsolutePosition.X, max.AbsolutePosition.Y)
+	local as = Vector2.new(max.AbsoluteSize.X, max.AbsoluteSize.Y)
+	local down = false
+	
+	max.MouseButton1Down:Connect(function()
+		local ap = Vector2.new(max.AbsolutePosition.X, max.AbsolutePosition.Y)
+		local as = Vector2.new(max.AbsoluteSize.X, max.AbsoluteSize.Y)
+			
+		bar.Size = UDim2.new(0, (mouse.X - ap.X), 1, 0)
+		fire.Value = true
+		down = true
+	 	
+	end)
+	
+	uis.InputEnded:Connect(function(input, gp)
+		
+		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			
+			down = false
+			fire.Value = false
+		
+		end
+		
+	end)
+	
+	mouse.Move:Connect(function()
+		local ap = Vector2.new(max.AbsolutePosition.X, max.AbsolutePosition.Y)
+		local as = Vector2.new(max.AbsoluteSize.X, max.AbsoluteSize.Y)
+		local x = mouse.X
+		
+		if down == true then
+			
+			fire.Value = false
+			fire.Value = true
+			
+			if mouse.X < ap.X then
+				
+				bar.Size = UDim2.new(0, 0, 1, 0)
+				
+			elseif mouse.X > (ap.X + as.X) then
+				
+				bar.Size = UDim2.new(0, as.X, 1, 0)
+			
+			else
+				
+				bar.Size = UDim2.new(0, (mouse.X - ap.X), 1, 0)
+				
+			end
+				
+		end
+		
+	end)
+	end)
+end
+local function XMAMOA_fake_script() -- Fake Script: StarterGui.ScreenGui.Frame.dector.visualFrame.healthbar.TextLabel.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_TextLabel7"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	pcall(function()
+	local textB = script.Parent
+	local frame = textB.Parent
+	local max = frame.Bar
+	local fire = frame.Fire
+	local bar = max
+	local as = Vector2.new(max.AbsoluteSize.X, max.AbsoluteSize.Y)
+	
+	fire.Changed:Connect(function()
+	
+		if fire.Value == true then
+	
+			local maxSize = as.X
+			local size = bar.Size.X.Offset
+			local num = (size / maxSize)
+			local num100 = (100 * (size / maxSize) + 1) / 10
+	
+			textB.Text = math.floor(num100)
+	
+		end
+		end)
+	end)
+end
+local function DKQLQK_fake_script() -- Fake Script: StarterGui.ScreenGui.Frame.LocalScript
+    local script = Instance.new("LocalScript")
+    script.Name = "LocalScript"
+    script.Parent = Converted["_Frame"]
+    local req = require
+    local require = function(obj)
+        local fake = fake_module_scripts[obj]
+        if fake then
+            return fake()
+        end
+        return req(obj)
+    end
+
+	pcall(function()
+	script.Parent.skid.Font = Enum.Font.Code
+	script.Parent.sense.Font = Enum.Font.Code
+	script.Parent.note.Font = Enum.Font.Code
+	script.Parent.section.visual.Font = Enum.Font.Code
+	script.Parent.section.main.Font = Enum.Font.Code
+	script.Parent.dector.mainFrame.decor2.TextLabel.Font = Enum.Font.Code
+	local most = script.Parent.Parent.Frame
+	local main = script.Parent.section.main
+	local visual = script.Parent.section.visual
+	local mainframe = script.Parent.dector.mainFrame
+	local visframe = script.Parent.dector.visualFrame
+	local mouse = game:GetService("Players").LocalPlayer:GetMouse()
+	
+	main.AutoButtonColor = false
+	visual.AutoButtonColor = false
+	main.Selectable = false
+	visual.Selectable = false
+	main.Active = false
+	visual.Active = false
+	
+	game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessed)
+		if gameProcessed then return end
+		if input.KeyCode == Enum.KeyCode.RightAlt then
+			if most.Visible == false then
+				most.Visible = true
+			else
+				most.Visible = false
+			end
+		end
+	end)
+	
+	main.MouseButton1Click:Connect(function()
+		if mainframe.Visible == false then
+			main.Frame:TweenSize(UDim2.new(1, 0, 0, 1), "Out", "Sine", 0.2, true)
+			visual.Frame:TweenSize(UDim2.new(0, 0, 0, 1), "Out", "Sine", 0.2, true)
+			mainframe.Visible = true
+			visframe.Visible = false
+		end
+	end)
+	
+	visual.MouseButton1Click:Connect(function()
+		if visframe.Visible == false then
+			visual.Frame:TweenSize(UDim2.new(1, 0, 0, 1), "Out", "Sine", 0.2, true)
+			main.Frame:TweenSize(UDim2.new(0, 0, 0, 1), "Out", "Sine", 0.2, true)
+			visframe.Visible = true
+			mainframe.Visible = false
+		end
+	end)
+	
+	
+	--[[
+	local url = 'https://i.imgur.com/TLX4XDa.png'
+	writefile('mouseicon.png', syn.request({Url=url}).Body)
+	local image = Drawing.new("Image")
+	image.Data = readfile('mouseicon.png')
+	image.Size = Vector2.new(25,25)
+	image.Visible = true
+	local mouse = game.Players.LocalPlayer:GetMouse()
+	local insetY = game:GetService("GuiService"):GetGuiInset().Y
+	game:GetService("RunService").RenderStepped:Connect(function()
+		image.Visible = script.Parent.Parent.Frame.Visible
+		image.Position = Vector2.new(mouse.X, mouse.Y + insetY)
+		game:GetService("UserInputService").MouseIconEnabled = not image.Visible
+	end)
+	--]]
+	
+	
+	--drag
+	
+	local UserInputService = game:GetService("UserInputService")
+	
+	local gui = script.Parent
+	
+	local dragging
+	local dragInput
+	local dragStart
+	local startPos
+	
+	local function update(input)
+		local delta = input.Position - dragStart
+		gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	end
+	
+	gui.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = gui.Position
+	
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+	
+	gui.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			dragInput = input
+		end
+	end)
+	
+	UserInputService.InputChanged:Connect(function(input)
+		if input == dragInput and dragging then
+			update(input)
+		end
+	end)
+	
+	if KRNL_LOADED then
+		script.Parent.krnl.Visible = true
+		script.Parent.unknown.Visible = false
+	end
+	
+	if syn then
+		script.Parent.synapse.Visible = true
+		script.Parent.unknown.Visible = false
+		end
+	end)
+end
+
+coroutine.wrap(SYMHWGF_fake_script)()
+coroutine.wrap(LVXWTQM_fake_script)()
+coroutine.wrap(NGJMYF_fake_script)()
+coroutine.wrap(OKYFYS_fake_script)()
+coroutine.wrap(EPEMZTH_fake_script)()
+coroutine.wrap(VXPN_fake_script)()
+coroutine.wrap(NWVEKRU_fake_script)()
+coroutine.wrap(NDINI_fake_script)()
+coroutine.wrap(PFQF_fake_script)()
+coroutine.wrap(UTWX_fake_script)()
+coroutine.wrap(SEIAX_fake_script)()
+coroutine.wrap(GEDU_fake_script)()
+coroutine.wrap(PDDFB_fake_script)()
+coroutine.wrap(STOAVL_fake_script)()
+coroutine.wrap(WIXUNY_fake_script)()
+coroutine.wrap(XMAMOA_fake_script)()
+coroutine.wrap(DKQLQK_fake_script)()
+end)
